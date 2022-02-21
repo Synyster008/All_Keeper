@@ -41,7 +41,7 @@
                   <h3 class="mb-0">Your Profile</h3>
                 </div>
                 <div class="col text-right">
-                  <a href="mailto:kmanadkat@gmail.com" target="_blank" class="btn btn-sm btn-primary">Request Change</a>
+                  <a href="mailto:manavsareen94@gmail.com" target="_blank" class="btn btn-sm btn-primary">Request Change</a>
                 </div>
               </div>
             </div>
