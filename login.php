@@ -59,7 +59,11 @@
               </div>
               <button name="studentLogin" type="submit" class="waves-effect waves-light btn">Continue</button>
             </form>
-            <a class="link" href="alogin.php">or Admin login</a>
+            or
+            <br>
+            <a class="link" href="alogin.php">Admin login</a>
+            <br>
+            <a class="link" href="hlogin.php">Housekeeper login</a>
           </div>
         </div>
       </div>
