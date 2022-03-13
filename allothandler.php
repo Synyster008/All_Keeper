@@ -47,11 +47,20 @@
     if(isset($_POST['regKeeperSubmit']) && isset($_SESSION['username'])){
       $name = mysqli_real_escape_string($db, $_POST['regName']);
       $floornumber = mysqli_real_escape_string($db, $_POST['regFloor']);
-      $hostel_name = mysqli_real_escape_string($db, $_POST['regFloor']);
+      $startDate=mysqli_real_escape_string($db, $_POST['startDate']);
+      $endDate=mysqli_real_escape_string($db, $_POST['endDate']);
+      $schedule=mysqli_real_escape_string($db, $_POST['schedule']);
+      // $hostel_name = mysqli_real_escape_string($db, $_POST['regFloor']);
+      $password='qwerty';
+
+      $startdate = date('Y-m-d', strtotime($startDate));
+      $enddate = date('Y-m-d', strtotime($endDate));
+      
+
 
       $name = strtolower($name);
 
-      $reg_query = "Insert into housekeeper (name, hostel, floor) values ('$name', '$hostel_name', '$floornumber')";
+      $reg_query = "Insert into housekeeper (name, floor,startDate,endDate,schedule,password) values ('$name', '$floornumber','$startdate','$enddate','$schedule','$password')";
       $reg_result = mysqli_query($db, $reg_query);
       if($reg_result){
         $_SESSION['worker_registered'] = 'New Housekeeper Registered.';
