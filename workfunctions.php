@@ -41,7 +41,7 @@
 
   // Get Number Of Request, Housekeeper & Feedback Info
   function getRequests($id, $db){
-    $query_request = "Select cr.request_id as reqid, hk.worker_id,cr.req_status,s.room ,cr.date, cr.cleaningtime, s.rollnumber, cr.rollnumber from cleanrequest cr Left Join housekeeper hk on cr.worker_id=hk.worker_id Left Join student s on cr.rollnumber = s.rollnumber where cr.worker_id='$id' and cr.req_status = 1";
+    $query_request = "Select cr.request_id, hk.worker_id,cr.req_status,s.room ,cr.date, cr.cleaningtime, s.rollnumber, cr.rollnumber from cleanrequest cr Left Join housekeeper hk on cr.worker_id=hk.worker_id Left Join student s on cr.rollnumber = s.rollnumber where cr.worker_id='$id' and cr.req_status = 1";
     $result_request = mysqli_query($db, $query_request);
     return $result_request;
   }

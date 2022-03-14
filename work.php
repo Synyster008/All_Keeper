@@ -60,7 +60,7 @@ if (isset($_GET['logout'])) {
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-
+                    <th scope="col"></th>
                     <th scope="col">Room</th>
                     <th scope="col">Date</th>
                     <th scope="col">Time Requested</th>
@@ -76,65 +76,31 @@ if (isset($_GET['logout'])) {
                       <tr>
                         <th scope="row">
                           <?php
-                          //if ($row['wid'] == NULL) {
-                            //echo "<a href='updaterequest.php?request_id=" . $row['request_id'] . "&room_num=" . $row['room'] . "&req_time=" . date('h:i a', strtotime($row['cleaningtime'])) . "' class='btn btn-sm btn-primary'>Update</a>";
-                          //} 
                           if ($row['req_status'] == 1) {
-                            //echo $row['name'] . " - Alloted";
-                            echo "<a href='updaterequest.php?room=" . $row['room'] . "&req_time=" . date('h:i a', strtotime($row['cleaningtime'])) . "' class='btn btn-sm btn-primary'>Update</a>";
-                          } 
-                          //else if ($row['wid'] != NULL && $row['req_status'] == 2) {
-                            //$numstars = $row['rating'];
-                            //$str = "";
-                            //for ($i = 0; $i < $numstars; $i++) {
-                              //if ($i == 0)
-                                //$str .= "<i class='fas fa-star fa-xs' style='color:#f1c40f'></i>";
-                              //else
-                                //$str .= "<i class='ml-1 fas fa-star fa-xs' style='color:#f1c40f'></i>";
-                            //}
-                            //echo $row['name'] . "<br>" . $str;
-                          }
+                            echo "<a href='updaterequest.php?request_id=" .$row['request_id']."&room=". $row['room'] ."&date=" .$row['date'] ."&req_time=" . date('h:i a', strtotime($row['cleaningtime'])) . "' class='btn btn-sm btn-primary'>Update</a>";
+                            }
                           ?>
                         </th>
                         <td>
                           <?php
-                          //echo strtoupper($row['room']);
+                          echo ($row['room']);
                           ?>
                         </td>
                         <td>
                           <?php
-                          //echo $row['date'];
+                          echo $row['date'];
                           ?>
                         </td>
                         <td>
                           <?php
                           $cleaningtime = $row['cleaningtime'];
-                          //echo date('h:i a', strtotime($cleaningtime));
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          //if ($row['timein'] == NULL) {
-                            //echo "--";
-                          //} else {
-                            //$fdtimein = $row['timein'];
-                            //echo date('h:i a', strtotime($fdtimein));
-                          //}
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          //if ($row['timeout'] == NULL) {
-                          //echo "--";
-                          //} else {
-                            //$fdtimeout = $row['timeout'];
-                            //echo date('h:i a', strtotime($fdtimeout));
-                          //}
+                          echo date('h:i a', strtotime($cleaningtime));
                           ?>
                         </td>
                       </tr>
                   <?php
                     }
+                  }
                   ?>
                 </tbody>
               </table>
