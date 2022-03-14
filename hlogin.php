@@ -47,17 +47,17 @@
               <?php include("errors.php") ?>
               <div class="row flex-h-center mb-0">
                 <div class="input-field col s8">
-                  <input type="number" name="HousekeeperUsername" id="rollnumber" class="validate" required>
+                  <input type="number" name="workerID" id="rollnumber" class="validate" required>
                   <label for="rollnumber">WorkerID</label>
                 </div>
               </div>
               <div class="row flex-h-center">
                 <div class="input-field col s8">
-                  <input type="password" name="HousekeeperPassword" id="password" class="validate" required>
+                  <input type="password" name="workerPassword" id="password" class="validate" required>
                   <label for="password">Password</label>
                 </div>
               </div>
-              <button type="submit" name="HousekeeperLogin" class="waves-effect waves-light btn">Continue</button>
+              <button type="submit" name="workerLogin" class="waves-effect waves-light btn">Continue</button>
             </form>
             or
             <br>
