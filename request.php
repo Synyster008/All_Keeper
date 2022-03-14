@@ -20,6 +20,7 @@
   <!-- Side Navigation -->
   <?php require("sidenav.php"); ?>
   <!-- Main content -->
+  
   <div class="main-content">
       <!-- Header -->
       <div class="header bg-background pb-6 pt-5 pt-md-6">
@@ -40,6 +41,17 @@
         <?php if (isset($_SESSION['req_failed'])) : ?>
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <?php echo $_SESSION['req_failed']; unset($_SESSION['req_failed']); ?>
+          </span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <?php endif ?>
+
+        <!-- notification message for selecting previous dates -->
+        <?php if (isset($_SESSION['req_err'])) : ?>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['req_err']; unset($_SESSION['req_err']); ?>
           </span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -70,7 +82,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                           </div>
-                          <input name="reqDate" id="dateInput" class="form-control datepicker" placeholder="Select date" type="text" required>
+                          <input  required name="reqDate" id="dateInput" class="form-control datepicker" placeholder="Select date" type="text" min="<?php echo date('Y-m-d'); ?>"/>
                         </div>
                       </div>
                     </div>
@@ -96,5 +108,6 @@
   <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/bootstrap/dist/js/bootstrap-datepicker.min.js"></script>
   <script src="assets/js/argon.min.js"></script>
+  
 </body>
 </html>
