@@ -7,7 +7,10 @@
     $rollnumber = $_SESSION['rollnumber'];
     $reqDate = mysqli_real_escape_string($db, $_POST['reqDate']);
     $reqTime = mysqli_real_escape_string($db, $_POST['reqTime']);
-    // Format Date Before Submission
+    
+    if(strtotime($reqDate)>strtotime("now")){
+      
+      // Format Date Before Submission
     $reqdate = date('Y-m-d', strtotime($reqDate));
 
     $req_query = "INSERT into cleanrequest(rollnumber,date,cleaningtime) values ('$rollnumber','$reqdate','$reqTime')";
@@ -19,6 +22,14 @@
       $_SESSION['req_failed'] = "Failed to send request, contact administrator.";
     }
     header("Location: request.php");
+    }
+      else{
+        $_SESSION['req_err'] = "Please enter future dates only.";
+        header("Location: request.php");
+        
+      }
+  
+    
   }
 
   // ================== Feedback Handler =================== //
