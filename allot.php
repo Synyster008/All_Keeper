@@ -67,6 +67,14 @@ if (isset($_GET['logout'])) {
                 <div class="col">
                   <h3 class="mb-0">Housekeeping</h3>
                 </div>
+                <form action="" method="GET">
+                  <div class="input-group mb-3">
+                    <input type="text" name="search" value="<?php if (isset($_GET['search'])) {
+                                                              echo $_GET['search'];
+                                                            } ?>" class="form-control" placeholder="Search data">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </form>
               </div>
             </div>
             <div class="table-responsive">
@@ -86,71 +94,139 @@ if (isset($_GET['logout'])) {
                   <?php
                   $info = getRequests($_SESSION['username'], $db);
                   if (mysqli_num_rows($info) > 0) {
-                    while ($row = mysqli_fetch_assoc($info)) {
 
-                  ?>
-                      <tr>
-                        <th scope="row">
-                          <?php
-                          if ($row['wid'] == NULL) {
-                            echo "<a href='allotworker.php?request_id=" . $row['request_id'] . "&room_num=" . $row['room'] . "&req_time=" . date('h:i a', strtotime($row['cleaningtime'])) . "' class='btn btn-sm btn-primary'>Allot Housekeeper</a>";
-                          } else if ($row['wid'] != NULL && $row['req_status'] == 1) {
-                            echo $row['name'] . " - Alloted";
-                          } else if ($row['wid'] != NULL && $row['req_status'] == 2) {
-                            $numstars = $row['rating'];
-                            $str = "";
-                            for ($i = 0; $i < $numstars; $i++) {
-                              if ($i == 0)
-                                $str .= "<i class='fas fa-star fa-xs' style='color:#f1c40f'></i>";
-                              else
-                                $str .= "<i class='ml-1 fas fa-star fa-xs' style='color:#f1c40f'></i>";
+                    while ($row = mysqli_fetch_assoc($info)) {
+                      if (isset($_GET['search'])) {
+                        if (str_contains($row['name'], $_GET['search'])) {
+                        ?>
+                          <tr>
+                            <th scope="row">
+                              <?php
+                              if ($row['wid'] == NULL) {
+                                echo "<a href='allotworker.php?request_id=" . $row['request_id'] . "&room_num=" . $row['room'] . "&req_time=" . date('h:i a', strtotime($row['cleaningtime'])) . "' class='btn btn-sm btn-primary'>Allot Housekeeper</a>";
+                              } else if ($row['wid'] != NULL && $row['req_status'] == 1) {
+                                echo $row['name'] . " - Alloted";
+                              } else if ($row['wid'] != NULL && $row['req_status'] == 2) {
+                                $numstars = $row['rating'];
+                                $str = "";
+                                for ($i = 0; $i < $numstars; $i++) {
+                                  if ($i == 0)
+                                    $str .= "<i class='fas fa-star fa-xs' style='color:#f1c40f'></i>";
+                                  else
+                                    $str .= "<i class='ml-1 fas fa-star fa-xs' style='color:#f1c40f'></i>";
+                                }
+                                echo $row['name'] . "<br>" . $str;
+                              }
+                              ?>
+                            </th>
+                            <td>
+                              <?php
+                              echo strtoupper($row['room']);
+                              ?>
+                            </td>
+                            <td>
+                              <?php
+                              echo $row['date'];
+                              ?>
+                            </td>
+                            <td>
+                              <?php
+                              $cleaningtime = $row['cleaningtime'];
+                              echo date('h:i a', strtotime($cleaningtime));
+                              ?>
+                            </td>
+                            <td>
+                              <?php
+                              if ($row['timein'] == NULL) {
+                                echo "--";
+                              } else {
+                                $fdtimein = $row['timein'];
+                                echo date('h:i a', strtotime($fdtimein));
+                              }
+                              ?>
+                            </td>
+                            <td>
+                              <?php
+                              if ($row['timeout'] == NULL) {
+                                echo "--";
+                              } else {
+                                $fdtimeout = $row['timeout'];
+                                echo date('h:i a', strtotime($fdtimeout));
+                              }
+                              ?>
+                            </td>
+                          </tr>
+                          
+                        <?php
+                        
+
+                        }
+                      } else {
+
+                        ?>
+                        <tr>
+                          <th scope="row">
+                            <?php
+                            if ($row['wid'] == NULL) {
+                              echo "<a href='allotworker.php?request_id=" . $row['request_id'] . "&room_num=" . $row['room'] . "&req_time=" . date('h:i a', strtotime($row['cleaningtime'])) . "' class='btn btn-sm btn-primary'>Allot Housekeeper</a>";
+                            } else if ($row['wid'] != NULL && $row['req_status'] == 1) {
+                              echo $row['name'] . " - Alloted";
+                            } else if ($row['wid'] != NULL && $row['req_status'] == 2) {
+                              $numstars = $row['rating'];
+                              $str = "";
+                              for ($i = 0; $i < $numstars; $i++) {
+                                if ($i == 0)
+                                  $str .= "<i class='fas fa-star fa-xs' style='color:#f1c40f'></i>";
+                                else
+                                  $str .= "<i class='ml-1 fas fa-star fa-xs' style='color:#f1c40f'></i>";
+                              }
+                              echo $row['name'] . "<br>" . $str;
                             }
-                            echo $row['name'] . "<br>" . $str;
-                          }
-                          ?>
-                        </th>
-                        <td>
-                          <?php
-                          echo strtoupper($row['room']);
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          echo $row['date'];
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          $cleaningtime = $row['cleaningtime'];
-                          echo date('h:i a', strtotime($cleaningtime));
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($row['timein'] == NULL) {
-                            echo "--";
-                          } else {
-                            $fdtimein = $row['timein'];
-                            echo date('h:i a', strtotime($fdtimein));
-                          }
-                          ?>
-                        </td>
-                        <td>
-                          <?php
-                          if ($row['timeout'] == NULL) {
-                            echo "--";
-                          } else {
-                            $fdtimeout = $row['timeout'];
-                            echo date('h:i a', strtotime($fdtimeout));
-                          }
-                          ?>
-                        </td>
-                      </tr>
+                            ?>
+                          </th>
+                          <td>
+                            <?php
+                            echo strtoupper($row['room']);
+                            ?>
+                          </td>
+                          <td>
+                            <?php
+                            echo $row['date'];
+                            ?>
+                          </td>
+                          <td>
+                            <?php
+                            $cleaningtime = $row['cleaningtime'];
+                            echo date('h:i a', strtotime($cleaningtime));
+                            ?>
+                          </td>
+                          <td>
+                            <?php
+                            if ($row['timein'] == NULL) {
+                              echo "--";
+                            } else {
+                              $fdtimein = $row['timein'];
+                              echo date('h:i a', strtotime($fdtimein));
+                            }
+                            ?>
+                          </td>
+                          <td>
+                            <?php
+                            if ($row['timeout'] == NULL) {
+                              echo "--";
+                            } else {
+                              $fdtimeout = $row['timeout'];
+                              echo date('h:i a', strtotime($fdtimeout));
+                            }
+                            ?>
+                          </td>
+                        </tr>
                   <?php
+
+                      }
                     }
                   }
                   ?>
-                </tbody>
               </table>
             </div>
           </div>
