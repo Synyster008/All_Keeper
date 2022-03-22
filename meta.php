@@ -1,15 +1,25 @@
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-<link rel="manifest" href="favicon/site.webmanifest">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+<link rel="icon" type="image/png" href="./assets/img/favicon.png">
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css"
+   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+<!-- Nucleo Icons -->
+<link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+<link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+<!-- Font Awesome Icons -->
+<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<!-- CSS Files -->
+<link id="pagestyle" href="./assets/css/material-dashboard.min.css?v=3.0.0" rel="stylesheet" />
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css">
-<!-- Argon CSS -->
-<link rel="stylesheet" href="assets/css/argon.min.css">
-<link rel="stylesheet" href="assets/css/main.min.css">
+<!-- For Web App :) -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Housekeeping">
+<meta name="application-name" content="Housekeeping">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#f0f2f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#f0f2f5" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f0f2f5" />

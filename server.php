@@ -1,7 +1,6 @@
 <?php
 session_start();
 require("db.php");
-
 $errors = array();
 
 // ========================= LOGIN STUDENT =======================
@@ -46,24 +45,4 @@ if(isset($_POST['adminLogin'])){
   }
 }
 
-//========================= LOGIN WORKER =======================
-if(isset($_POST['workerLogin'])){
-  $workerID = mysqli_real_escape_string($db, $_POST['workerID']);
-  $password = mysqli_real_escape_string($db, $_POST['workerPassword']);
-
-  $query_find_worker = "select * from housekeeper where worker_id='$workerID'";
-  $result_find_worker = mysqli_query($db,$query_find_worker);
-  if (mysqli_num_rows($result_find_worker) == 1) {
-    $row = mysqli_fetch_assoc($result_find_worker);
-    if($password == $row['password']){
-      $_SESSION['worker'] = $workerID;
-      $_SESSION['worker_logged'] = "You are now logged in";
-      header("Location: work.php");
-    }else{
-      array_push($errors, "Wrong password! Please try again.");
-    }
-  }else {
-    array_push($errors, "Worker not found!");
-  }
-}
 ?>
