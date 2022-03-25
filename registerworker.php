@@ -100,6 +100,7 @@ if (isset($_GET['logout'])) {
                           <option selected="true" value="" >Select Option</option>
                           <option value="1">6am to 2pm</option>
                           <option value="2">2pm to 10pm</option>
+                          <option value="3">10pm to 6am</option>
                           
                         </select>
                       </div>
