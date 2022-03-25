@@ -65,7 +65,8 @@
           <div class="row">
             <div class="col">
               <h5 class="card-title text-uppercase text-muted mb-0">Schedule</h5>
-              <span class="h2 font-weight-bold mb-0"><?php echo $schedule['schedule']; ?></span>
+              <span class="h2 font-weight-bold mb-0"><?php if ($schedule['schedule']==1){echo "6am to 2pm";} 
+              elseif($schedule['schedule']==2){echo "2pm to 10pm";} elseif ($schedule['schedule']==3){echo "10pm to 6am";} ?></span>
             </div>
             <div class="col-auto">
               <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
