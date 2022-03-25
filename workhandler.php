@@ -11,7 +11,7 @@ if(isset($_POST['requestSubmit'])  && isset($_SESSION['worker']) ){
     $requesttimeout = mysqli_real_escape_string($db, $_POST['requestTimeout']);
     $requestreport = mysqli_real_escape_string($db, $_POST['requestReport']);
 
-    $request_query = "INSERT into report(request_id, time_in, time_out, worker_id) values ('$updatereqid','$requesttimein','$requesttimeout','$workerid')";
+    $request_query = "INSERT into report(request_id, time_in, time_out, worker_id, report) values ('$updatereqid','$requesttimein','$requesttimeout','$workerid', '$requestreport')";
 
     // Submit Report
     $request_result = mysqli_query($db, $request_query);
@@ -27,10 +27,11 @@ if(isset($_POST['requestSubmit'])  && isset($_SESSION['worker']) ){
       $_SESSION['update'] = "Report is sent for request id - ".$updatereqid;
     }
 
-    // $reportid = mysqli_query($db, "SELECT report_id from report where request_id='$updatereqid'");
-    // $reportid2 = mysqli_fetch_assoc($reportid);
-    // $reportid3 = $reportid2['report_id'];
-
+    $reportid = mysqli_query($db, "SELECT report_id from report where request_id='$updatereqid'");
+    $reportid2 = mysqli_fetch_assoc($reportid);
+    $reportid3 = $reportid2['report_id'];
+    $report_query = "UPDATE  cleanrequest SET report_id = '$reportid3' where request_id='$updatereqid'";
+    $report_result = mysqli_query($db, $report_query);
     header("Location: updaterequest.php");
 }
 
