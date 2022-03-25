@@ -58,16 +58,16 @@ if (isset($_GET['logout'])) {
                       <div class="form-group">
                         <label class="form-control-label" for="input-id">Request Id</label>
                         <input type="text" name="allotId" id="input-id" class="form-control" value="<?php if (isset($_GET['request_id'])) {
-                                                                                                                echo $_GET['request_id'];
-                                                                                                              } ?>">
+                                                                                                      echo $_GET['request_id'];
+                                                                                                    } ?>">
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
                         <label class="form-control-label" for="input-room">Room Number</label>
-                        <input type="text" name="allotRoom" id="input-room" class="form-control"  value="<?php if (isset($_GET['room_num'])) {
-                                                                                                                    echo $_GET['room_num'];
-                                                                                                                  } ?>">
+                        <input type="text" name="allotRoom" id="input-room" class="form-control" value="<?php if (isset($_GET['room_num'])) {
+                                                                                                          echo $_GET['room_num'];
+                                                                                                        } ?>">
                       </div>
                     </div>
                     <div class="col-md-3">
@@ -82,18 +82,30 @@ if (isset($_GET['logout'])) {
                       <div class="form-group">
                         <label class="form-control-label" for="input-requestid">Housekeeper<span class="text-danger">*</span></label>
                         <select name="workerId" class="form-control" id="input-requestid" required>
-                          <option selected="true" value="" >Select Option</option>
+                          <option selected="true" value="">Select Option</option>
                           <?php
                           // ================== Get Request-ids for feedback Handler =================== //
                           // $hostel_name = substr($_SESSION['username'], -1);
-                          $workerIds_query = "Select worker_id, name, floor from housekeeper ";
+                          $workerIds_query = "Select worker_id, name, floor, schedule from housekeeper ";
                           $workerIds_result = mysqli_query($db, $workerIds_query);
                           if (mysqli_num_rows($workerIds_result) > 0) {
                             while ($row = mysqli_fetch_assoc($workerIds_result)) {
+                              if (strtotime("06:00:01") <= strtotime($_GET['req_time']) && strtotime($_GET['req_time']) <= strtotime("14:00:00") && $row['schedule'] == 1) {
                           ?>
-                              <option value="<?php echo $row['worker_id'] ?>"><?php echo "Floor " . $row['floor'] . " - " . $row['name'] ?></option>
+                                <option value="<?php echo $row['worker_id'] ?>"><?php echo "Floor " . $row['floor'] . " - " . $row['name'] ?></option>
+                              <?php } elseif (strtotime("14:00:01") <= strtotime($_GET['req_time']) && strtotime($_GET['req_time']) <= strtotime("22:00:00") && $row['schedule'] == 2) {
+                              ?>
+                                <option value="<?php echo $row['worker_id'] ?>"><?php echo "Floor " . $row['floor'] . " - " . $row['name'] ?></option>
+                              <?php } elseif (strtotime("00:00:01") <= strtotime($_GET['req_time']) && strtotime($_GET['req_time']) <= strtotime("06:00:00") && $row['schedule'] == 3) {
+                              ?>
+                                <option value="<?php echo $row['worker_id'] ?>"><?php echo "Floor " . $row['floor'] . " - " . $row['name'] ?></option>
+                              <?php } elseif (strtotime("22:00:01") <= strtotime($_GET['req_time']) && strtotime($_GET['req_time']) <= strtotime("24:00:00") && $row['schedule'] == 3) {
+                              ?>
+                                <option value="<?php echo $row['worker_id'] ?>"><?php echo "Floor " . $row['floor'] . " - " . $row['name'] ?></option>
                           <?php }
-                          } ?>
+                            }
+                          }
+                          ?>
                         </select>
                       </div>
                     </div>
