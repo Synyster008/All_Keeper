@@ -82,8 +82,11 @@
                           <?php
                           $time_in = $row['time_in'];
                           $time_out = $row['time_out'];
-                          if ($row['req_status'] == 2) {
+                          if ($row['req_status'] == 2 && $row['feedback_id']== NULL) {
                             echo "<a href='feedback.php?request_id=" .$row['request_id']."&name=". $row['name'] ."&date=" .$row['date'] ."&time_in=" . date('h:i a', strtotime($time_in)). "&time_out=" . date('h:i a', strtotime($time_out))."&report" . $row['report'] . "' class='btn btn-sm btn-primary'>Rate</a>";
+                            }
+                            elseif ($row['req_status'] == 2 && $row['feedback_id']!= NULL) {
+                              echo "<span style='color:#27ae60'>Rated</span>";
                             }
                           ?>
                         </th>
