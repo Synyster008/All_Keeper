@@ -73,6 +73,11 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="studentreport.php">
+            <i class="ni ni-send"></i>Reports
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="feedback.php">
             <i class="ni ni-archive-2"></i>Feedback
           </a>
