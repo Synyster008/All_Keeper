@@ -2,10 +2,7 @@
   session_start();
   if (!isset($_SESSION['rollnumber'])) {
   	header("Location: login.php");
-  } else if (!isset($_SESSION['username']))
-  {
-    header("Location: alogin.php");
-  }
+  } 
   if (isset($_GET['logout'])) {
     unset($_SESSION['rollnumber']);
     session_destroy();
