@@ -46,4 +46,13 @@
     return $result_request;
   }
 
+  // Get Report from Housekeeper
+  function getReport($roll, $db){
+    $query_request = "Select cr.request_id, cr.feedback_id, hk.worker_id, cr.req_status, hk.name ,cr.date, r.time_in, r.time_out, r.report, r.request_id from cleanrequest cr Left Join housekeeper hk on cr.worker_id=hk.worker_id Left Join report r on cr.report_id = r.report_id where cr.rollnumber='$roll' and cr.req_status = 2";
+    $result_request = mysqli_query($db, $query_request);
+    return $result_request;
+    }
+
+
+
 ?>

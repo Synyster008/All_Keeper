@@ -7,10 +7,7 @@
     $rollnumber = $_SESSION['rollnumber'];
     $reqDate = mysqli_real_escape_string($db, $_POST['reqDate']);
     $reqTime = mysqli_real_escape_string($db, $_POST['reqTime']);
-    
-    if(strtotime($reqDate)>strtotime("now")){
-      
-      // Format Date Before Submission
+    // Format Date Before Submission
     $reqdate = date('Y-m-d', strtotime($reqDate));
 
     $req_query = "INSERT into cleanrequest(rollnumber,date,cleaningtime) values ('$rollnumber','$reqdate','$reqTime')";
@@ -22,14 +19,6 @@
       $_SESSION['req_failed'] = "Failed to send request, contact administrator.";
     }
     header("Location: request.php");
-    }
-      else{
-        $_SESSION['req_err'] = "Please enter future dates only.";
-        header("Location: request.php");
-        
-      }
-  
-    
   }
 
   // ================== Feedback Handler =================== //
@@ -62,6 +51,8 @@
     $feedid = mysqli_query($db, "SELECT feedback_id from feedback where request_id='$feedreqid'");
     $feedid2 = mysqli_fetch_assoc($feedid);
     $feedid3 = $feedid2['feedback_id'];
+    $report_query = "UPDATE  cleanrequest SET feedback_id = '$feedid3' where request_id='$feedreqid'";
+    $report_result = mysqli_query($db, $report_query);
 
     if($feedsuggestion != ""){
       $suggest_query = "INSERT into suggestions(feedback_id,rollnumber,suggestion) values ('$feedid3','$rollnumber','$feedsuggestion')";
