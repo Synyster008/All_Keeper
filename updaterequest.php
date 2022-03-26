@@ -62,7 +62,7 @@ $id = $_SESSION['worker'];
 $reqids_query = "Select request_id,name from 
 cleanrequest cr Inner JOIN housekeeper hk on cr.worker_id=hk.worker_id 
 inner join student s on s.rollnumber = cr.rollnumber
-where cr.req_status = 1";
+where cr.req_status = 1 and hk.worker_id = '$id'";
 $reqids_result = mysqli_query($db, $reqids_query);
 if(mysqli_num_rows($reqids_result) > 0){
   while ($row = mysqli_fetch_assoc($reqids_result)) {

@@ -59,16 +59,17 @@
 require("db.php");
 // ================== Get Request-ids for feedback Handler =================== //
 $rolll = $_SESSION['rollnumber'];
-$reqids_query = "Select request_id,name from 
+$reqids_query = "Select request_id,name,feedback_id from 
 cleanrequest cr Inner JOIN housekeeper hk on cr.worker_id=hk.worker_id 
 inner join student s on s.rollnumber = cr.rollnumber
-where cr.req_status = 1 and s.rollnumber = '$rolll'";
+where cr.req_status = 2 and s.rollnumber = '$rolll'";
 $reqids_result = mysqli_query($db, $reqids_query);
 if(mysqli_num_rows($reqids_result) > 0){
   while ($row = mysqli_fetch_assoc($reqids_result)) {
+    if ($row['feedback_id'] == NULL){
 ?>                          
 <option value="<?php echo $row['request_id'] ?>"><?php echo $row['request_id'] . " - " . $row['name'] ?></option>
-<?php }} ?>
+<?php }}} ?>
                         </select>
                       </div>
                     </div>
