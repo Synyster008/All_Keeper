@@ -1,12 +1,12 @@
-<?php 
-  if (!isset($_SESSION['worker'])) {
-  	header("Location: hlogin.php");
-  }
-  if (isset($_GET['logout'])) {
-    unset($_SESSION['username']);
-    session_destroy();
-  	header("Location: hlogin.php");
-  }
+<?php
+if (!isset($_SESSION['worker'])) {
+  header("Location: hlogin.php");
+}
+if (isset($_GET['logout'])) {
+  unset($_SESSION['username']);
+  session_destroy();
+  header("Location: hlogin.php");
+}
 ?>
 <!-- SideNav -->
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -19,6 +19,42 @@
     <!-- <a class="navbar-brand pt-4" href="index.php"> -->
     <a class="navbar-brand pt-4" href="">
       <h2><?php echo $_SESSION['worker']; ?></h2>
+      <h2><?php
+          require("db.php");
+          // ================== Get Request-ids for feedback Handler =================== //
+          $id = $_SESSION['worker'];
+          $reqids_query = "Select cr.request_id, f.rating from 
+cleanrequest cr left join feedback f on f.feedback_id = cr.feedback_id
+where cr.req_status = 2 and cr.worker_id = '$id'";
+          $reqids_result = mysqli_query($db, $reqids_query);
+          if (mysqli_num_rows($reqids_result) > 0) {
+            while ($row = mysqli_fetch_assoc($reqids_result)) {
+              // echo $row["rating"], "\n";
+              $rate_db[] = $row;
+              $sum_rates[] = $row['rating'];
+            }
+            if (count($rate_db)) {
+              $rate_times = count($rate_db);
+              $sum_rates = array_sum($sum_rates);
+              $rate_value = $sum_rates / $rate_times;
+              // echo round($rate_value,0);
+
+              $numstars = round($rate_value, 0);
+              $str = "";
+              for ($i = 0; $i < $numstars; $i++) {
+                if ($i == 0)
+                  $str .= "<i class='fas fa-star fa-xs' style='color:#f1c40f'></i>";
+                else
+                  $str .= "<i class='ml-1 fas fa-star fa-xs' style='color:#f1c40f'></i>";
+              }
+              echo $str;
+            } else {
+              $rate_times = 0;
+              $rate_value = 0;
+            }
+          }
+          ?></h2>
+
     </a>
     <!-- User -->
     <ul class="nav align-items-center d-md-none">
