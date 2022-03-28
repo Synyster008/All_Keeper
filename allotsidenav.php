@@ -92,6 +92,11 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="areport.php">
+            <i class="ni ni-archive-2"></i>Report of Housekeeper
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="allot.php?logout='1'">
             <i class="ni ni-user-run"></i> Logout
           </a>
