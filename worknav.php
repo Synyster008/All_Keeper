@@ -24,7 +24,7 @@ if (isset($_GET['logout'])) {
           // ================== Get Request-ids for feedback Handler =================== //
           $id = $_SESSION['worker'];
           $reqids_query = "Select cr.request_id, f.rating from 
-cleanrequest cr left join feedback f on f.feedback_id = cr.feedback_id
+cleanrequest cr inner join feedback f on f.feedback_id = cr.feedback_id
 where cr.req_status = 2 and cr.worker_id = '$id'";
           $reqids_result = mysqli_query($db, $reqids_query);
           if (mysqli_num_rows($reqids_result) > 0) {

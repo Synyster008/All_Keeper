@@ -41,8 +41,6 @@
     $workerid = mysqli_query($db, "SELECT worker_id from cleanrequest where request_id='$feedreqid'");
     $workerid2 = mysqli_fetch_assoc($workerid);
     $workerid3 = $workerid2['worker_id'];
-    mysqli_query($db, "Update housekeeper set rooms_cleaned = rooms_cleaned + 1 where worker_id = '$workerid3'");
-    mysqli_query($db, "Update cleanrequest set req_status = 2 where request_id = '$feedreqid'");
 
     if ($feed_result) {
       $_SESSION['feed_sent'] = "Feedback is sent for request id - ".$feedreqid;
